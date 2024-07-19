@@ -23,16 +23,14 @@ ChartJS.register(
   Legend
 );
 
-// InsightsChart component definition
 const InsightsChart = () => {
   const [chartData, setChartData] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  // Fetch data from API on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch data from the API endpoint
-        const response = await axios.get('http://localhost:5000/insights');
+        const response = await axios.get('/insights'); // Fetch data from backend
         const insights = response.data;
 
         if (Array.isArray(insights)) {
@@ -45,59 +43,89 @@ const InsightsChart = () => {
             return acc;
           }, {});
 
-          // Extract sectors and intensities for chart
           const sectors = Object.keys(sectorIntensityMap);
           const intensities = Object.values(sectorIntensityMap);
 
-          // Update chart data state
           setChartData({
             labels: sectors,
             datasets: [
               {
                 label: 'Intensity',
                 data: intensities,
-                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                backgroundColor: sectors.map(
+                  () => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.6)`
+                ),
               }
             ]
           });
+          setLoading(false);
         } else {
           console.error('Fetched insights data is not an array:', insights);
+          setLoading(false);
         }
       } catch (error) {
         console.error('Error fetching insights data:', error.message);
+        setLoading(false);
       }
     };
 
-    // Call fetchData function on component mount
     fetchData();
   }, []);
 
-  // Render the InsightsChart component
   return (
-    <Container className="chart-container">
+    <div className="chart-container">
       <Paper elevation={3} className="chart-paper">
         <Typography variant="h5" component="h2">
           Sector Intensity
         </Typography>
-        {chartData.labels ? (
-          // Render Bar chart if chartData.labels is available
-          <Bar
-            data={chartData}
-            options={{
-              responsive: true,
-              scales: {
-                y: { beginAtZero: true }
-              }
-            }}
-          />
-        ) : (
-          // Render CircularProgress if chartData.labels is not available
+        {loading ? (
           <div className="loading-container">
             <CircularProgress />
           </div>
+        ) : (
+          chartData.labels ? (
+            <Bar
+              data={chartData}
+              options={{
+                responsive: true,
+                scales: {
+                  x: {
+                    title: {
+                      display: true,
+                      text: 'Sectors'
+                    }
+                  },
+                  y: {
+                    beginAtZero: true,
+                    title: {
+                      display: true,
+                      text: 'Intensity'
+                    }
+                  }
+                },
+                plugins: {
+                  legend: {
+                    display: true,
+                    position: 'top'
+                  },
+                  tooltip: {
+                    callbacks: {
+                      label: function (context) {
+                        return `Intensity: ${context.raw}`;
+                      }
+                    }
+                  }
+                }
+              }}
+            />
+          ) : (
+            <Typography variant="h6" component="p">
+              No data available.
+            </Typography>
+          )
         )}
       </Paper>
-    </Container>
+    </div>
   );
 };
 

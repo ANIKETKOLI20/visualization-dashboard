@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full height of the viewport */
+  height: 100vh; 
 }
 
 .chart-paper {
@@ -13,14 +13,14 @@
   padding: 20px;
   width: 100%;
   max-width: 800px;
-  margin: auto; 
-  margin-top: 20px; 
-  height: 80%; 
+  margin: auto;
+  margin-top: 20px;
+  height: 80%;
 }
 
 .loading-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px; 
+  height: 200px;
 }
