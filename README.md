@@ -1,18 +1,50 @@
-Visualization Dashboard
+Data Visualization Dashboard
+This project involves creating a data visualization dashboard using the provided JSON data. The dashboard is designed to provide insights into various data metrics through interactive and creative visualizations. It uses MongoDB for data storage and offers various filters to analyze the data effectively.
 
-This project is a data visualization dashboard built using the MERN (MongoDB, Express, React, Node.js) stack. It aims to create interactive charts and graphs based on provided JSON data, stored in a MongoDB database. The dashboard allows users to explore and analyze various metrics and trends through customizable filters.
+Table of Contents
+[(bjective](#Objective)
+[Data](#data)
+[Features](#features)
+[Technologies Used](#technologies-used)
+[Important Links](#important-links)
 
-Features
+## Objective
+The objective of this assignment is to create a comprehensive data visualization dashboard using the provided JSON data. The dashboard should leverage MongoDB for data storage and offer various interactive charts and graphs to generate insights based on specific variables.
 
-Data Visualization: Utilizes Google Charts for creating interactive charts and graphs.
-Backend: Node.js and Express.js server to handle API requests and interact with MongoDB.
-Frontend: React.js for building a responsive and intuitive user interface.
-Database: MongoDB for storing and querying large datasets efficiently.
-Filters: Allows users to filter data based on various criteria such as year, topic, sector, region, and more.
-Deployment: Deployed on a development server for testing and development purposes.
+## Data
+JSON File: jsondata.json
 
-Technologies Used
+## Features
+Data Integration: Create a MongoDB database from the provided JSON data.
+Visualization: Use libraries such as D3.js, chart.js, fusioncharts, plotly.js, google charts, highcharts, etc., to create interactive and creative visualizations.
+Important Variables:
+Intensity
+Likelihood
+Relevance
+Year
+Country
+Topics
+Region
+City
+Filters:
+End Year
+Topics
+Sector
+Region
+PEST
+Source
+SWOT
+Country
+City
+Any other relevant filters from the data
 
-Frontend: React.js, React Router, React Google Charts
-Backend: Node.js, Express.js, MongoDB, Mongoose
-Other Tools: Axios (for API requests), dotenv (for environment variables), Nodemon (for automatic server restarts during development)
+## Technologies Used
+Frontend: MERN Stack or MEAN Stack or React Native (choose based on preference)
+Backend: Node.js, Express
+Database: MongoDB
+Visualization Libraries: D3.js (recommended), chart.js, fusioncharts, plotly.js, google charts, highcharts
+Other: MongoDB Atlas or local MongoDB instance
+
+## Important Links
+**GitHub Repository** : https://github.com/ANIKETKOLI20/visualization-dashboard
+** Website URL ** : 
