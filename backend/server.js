@@ -35,11 +35,26 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-// Route to fetch insights data from MongoDB
+// Route to fetch insights data from MongoDB with filters
 app.get('/insights', async (req, res) => {
   try {
-    console.log('Fetching insights...');
-    const insights = await Insight.find({});
+    console.log('Fetching insights with filters...');
+    
+    const { endYear, topics, sector, region, pest, source, swot, country, city } = req.query;
+    
+    const filterCriteria = {};
+    
+    if (endYear) filterCriteria.year = endYear;
+    if (topics) filterCriteria.topics = { $in: topics.split(',') };
+    if (sector) filterCriteria.sector = sector;
+    if (region) filterCriteria.region = region;
+    if (pest) filterCriteria.pest = pest;
+    if (source) filterCriteria.source = source;
+    if (swot) filterCriteria.swot = swot;
+    if (country) filterCriteria.country = country;
+    if (city) filterCriteria.city = city;
+
+    const insights = await Insight.find(filterCriteria);
     console.log('Fetched insights:', insights);
     res.json(insights); 
   } catch (error) {
